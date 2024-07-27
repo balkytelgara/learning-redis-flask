@@ -1,0 +1,93 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+}
+
+body {
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	font: 18px "JetBrainsMono Nerd Font";
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+fieldset {
+	padding: 1rem 3rem;
+	border-color: gray;
+	border-radius: 15px;
+	border-width: 1px;
+}
+
+legend {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+input[type="submit"] {
+	background-color: black;
+	color: white;
+	border-color: gray;
+	cursor: pointer;
+	transition:
+		background-color 0.3s, 
+		color 0.3s;
+}
+
+input[type="submit"]:hover {
+	background-color: white;
+	color: black;
+}
+
+input, textarea {
+	border-color: gray;
+	border-radius: 15px;
+	border-width: 1px;
+	outline: none;
+	width: 100%;
+	padding: 1rem;
+}
+
+textarea {
+	width: 400px;
+	height: 200px;
+	resize: none;
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.list {
+	width: 400px;
+}
+
+.list ol {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.list ol li::marker {
+	color: black;
+}
+
+.list ol li {
+	color: gray;
+	cursor: pointer;
+}
+
+.list ol li:hover {
+	color: black;
+	text-decoration: underline;
+	transition: color 0.3s;
+}

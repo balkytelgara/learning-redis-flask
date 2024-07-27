@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Redis Learning Journey with Flask</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+	<div class="content">
+		<form action="/post" method="POST">
+			<fieldset>
+				<legend>Post title</legend>
+				<input type="text" name="posttitle" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit." required>
+			</fieldset>
+			<fieldset>
+				<legend>Post content</legend>
+				<textarea name="postcontent" placeholder="Saepe sed placeat nisi, dolore obcaecati quos, quod sint nihil explicabo nemo recusandae quae eaque ducimus provident libero, adipisci reiciendis minima officiis." required></textarea>
+			</fieldset>
+			<fieldset>
+				<legend></legend>
+				<input type="submit" value="Submit">
+			</fieldset>
+		</form>
+		<div class="list">
+			<fieldset>
+				<legend>List</legend>
+				{% if posts %}
+					<ol>
+						{% for i in posts %}
+							<li>{{ posts[i]["posttitle"] }}</li>
+						{% endfor %}
+					</ol>
+				{% else %}
+					<p>You have not posted anything yet.</p>
+				{% endif %}
+			</fieldset>
+		</div>
+	</div>
+</body>
+</html>
