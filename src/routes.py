@@ -9,41 +9,41 @@ from . import r
 
 @app.before_request
 def before_request():
-	if not r.get("postcount") or \
-		 not r.smembers("posts"):
-		r.set("postcount", 0)
-		r.sadd("posts", "")
+  if not r.get("postcount") or \
+     not r.smembers("posts"):
+    r.set("postcount", 0)
+    r.sadd("posts", "")
 
 @app.route("/")
 def index():
-	posts = {}
+  posts = {}
 
-	if r.smembers("posts"):
-		postlist = list(r.smembers("posts"))[1:]
+  if r.smembers("posts"):
+    postlist = list(r.smembers("posts"))[1:]
 
-		for i, j in enumerate(postlist):
-			posttitle, postcontent = r.hmget(j, "posttitle", "postcontent")
-			posts[i] = {
-				"posttitle": posttitle,
-				"postcontent": postcontent
-			}
+    for i, j in enumerate(postlist):
+      posttitle, postcontent = r.hmget(j, "posttitle", "postcontent")
+      posts[i] = {
+        "posttitle": posttitle,
+        "postcontent": postcontent
+      }
 
-	return render_template("index.htm", posts=posts)
+  return render_template("index.htm", posts=posts)
 
 @app.route("/post", methods=["POST"])
 def post():
-	posttitle = request.form.get("posttitle")
-	postcontent = request.form.get("postcontent")
-	postcount = int(r.get("postcount"))
-	post = "post:%s" % postcount
+  posttitle = request.form.get("posttitle")
+  postcontent = request.form.get("postcontent")
+  postcount = int(r.get("postcount"))
+  post = "post:%s" % postcount
 
-	r.hset(post, mapping={
-		"posttitle": posttitle,
-		"postcontent": postcontent
-	})
+  r.hset(post, mapping={
+    "posttitle": posttitle,
+    "postcontent": postcontent
+  })
 
-	r.sadd("posts", post)
+  r.sadd("posts", post)
 
-	r.set("postcount", postcount + 1)
-		
-	return redirect(url_for("index"))
+  r.set("postcount", postcount + 1)
+    
+  return redirect(url_for("index"))
